@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // type ReciptComponentProp = {
 // 	totalPrice:number;
 // 	products?: ProductMenuComponentProps;
@@ -10,17 +10,35 @@ export default function ReciptComponent({
 	totalPriceProps: number;
 }) {
 	const [text, setText] = useState("");
+	const [discount, setDiscount] = useState(0);
+
+	const [finalPrice, setFinalPrice] = useState(
+		totalPriceProps + totalPriceProps * 0.09
+	);
+
 	function isTextDiscountCode() {
 		switch (text) {
 			case "gold":
-				console.log(30);
-				return 30;
+				setFinalPrice(
+					totalPriceProps - totalPriceProps * 0.3 + totalPriceProps * 0.09
+				);
+				setDiscount(totalPriceProps * 0.3);
+				break;
 			case "silver":
-				return 20;
+				setFinalPrice(
+					totalPriceProps - totalPriceProps * 0.2 + totalPriceProps * 0.09
+				);
+				setDiscount(totalPriceProps * 0.2);
+				break;
 			case "bronze":
-				return 10;
+				setFinalPrice(
+					totalPriceProps - totalPriceProps * 0.1 + totalPriceProps * 0.09
+				);
+				setDiscount(totalPriceProps * 0.1);
+				break;
 			default:
-				alert("invalid");
+				setDiscount(0);
+				setFinalPrice(finalPrice);
 				break;
 		}
 	}
@@ -34,11 +52,11 @@ export default function ReciptComponent({
 					</div>
 					<div className=" flex justify-between items-center w-full">
 						<p>حق سرویس و کارمزد :</p>
-						<p>1200تومان</p>
+						<p>{totalPriceProps * 0.09}تومان</p>
 					</div>
 					<div className=" flex justify-between items-center w-full">
 						<p>تخفیف :</p>
-						<p>6000 تومان</p>
+						<p>{discount}تومان</p>
 					</div>
 
 					<div className="flex items-center justify-center">
@@ -61,7 +79,11 @@ export default function ReciptComponent({
 				<div className="flex flex-col gap-2">
 					<div className="bg-price flex justify-between items-center rounded-md px-1 py-1.5">
 						<p>مبلغ قابل پرداخت</p>
-						<p>35200 تومان</p>
+						<p>
+							{finalPrice === 0
+								? totalPriceProps + totalPriceProps * 0.09
+								: Math.round(finalPrice)}
+						</p>
 					</div>
 					<div>
 						<button className="bg-button text-center py-2  text-white w-full rounded-md">
