@@ -6,7 +6,7 @@ function HomeComponent() {
 	const [totalPrice, setTotalPrice] = useState(0);
 	return (
 		<div className="w-full h-screen bg-primary p-4 flex flex-col md:flex-row items-start gap-10 ">
-			<MenuComponent setTotalPrice={() => setTotalPrice(totalPrice)} />
+			<MenuComponent setTotalPrice={setTotalPrice} />
 			<ReciptComponent totalPriceProps={totalPrice} />
 		</div>
 	);

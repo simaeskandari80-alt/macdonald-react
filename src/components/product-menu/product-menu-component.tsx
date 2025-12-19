@@ -1,17 +1,18 @@
-import { useState } from "react";
 export type ProductMenuComponentProps = {
 	title: string;
 	price: number;
 	image: string;
+	count: number;
+	onCountChang: (count: number) => void;
 };
 function ProductMenuComponent(props: ProductMenuComponentProps) {
-	const [count, setCount] = useState(0);
+	// const [count, setCount] = useState(0);
 	function handleIncreasment() {
-		setCount(count + 1);
+		props.onCountChang(props.count + 1);
 	}
 	function handleDecreasment() {
-		if (count > 0) {
-			setCount(count - 1);
+		if (props.count > 0) {
+			props.onCountChang(props.count - 1);
 		}
 	}
 	return (
@@ -31,7 +32,7 @@ function ProductMenuComponent(props: ProductMenuComponentProps) {
 							>
 								+
 							</button>
-							<span className="w-6 text-center">{count}</span>
+							<span className="w-6 text-center">{props.count}</span>
 							<button
 								className="bg-button rounded-l-sm text-white  pb-1 w-6 text-center"
 								onClick={handleDecreasment}
@@ -41,7 +42,7 @@ function ProductMenuComponent(props: ProductMenuComponentProps) {
 						</div>
 					</div>
 				</div>
-				<div>{count * props.price}تومان</div>
+				<div>{props.count * props.price}تومان</div>
 			</div>
 		</div>
 	);
