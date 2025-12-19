@@ -1,17 +1,36 @@
-import type { ProductMenuComponentProps } from "../product-menu/product-menu-component";
+import { useState } from "react";
 // type ReciptComponentProp = {
 // 	totalPrice:number;
 // 	products?: ProductMenuComponentProps;
 // 	count?:number;
 // };
-export default function ReciptComponent() {
+export default function ReciptComponent({
+	totalPriceProps,
+}: {
+	totalPriceProps: number;
+}) {
+	const [text, setText] = useState("");
+	function isTextDiscountCode() {
+		switch (text) {
+			case "gold":
+				console.log(30);
+				return 30;
+			case "silver":
+				return 20;
+			case "bronze":
+				return 10;
+			default:
+				alert("invalid");
+				break;
+		}
+	}
 	return (
 		<div className="bg-secondary w-full md:w-1/4 p-4 rounded-2xl">
 			<div className="flex flex-col gap-20">
 				<div className="flex flex-col gap-3">
 					<div className=" flex justify-between items-center w-full">
 						<p>جمع کل سفارشات :</p>
-						<p>4000 تومان</p>
+						<p>{totalPriceProps}تومان</p>
 					</div>
 					<div className=" flex justify-between items-center w-full">
 						<p>حق سرویس و کارمزد :</p>
@@ -25,9 +44,18 @@ export default function ReciptComponent() {
 					<div className="flex items-center justify-center">
 						<input
 							type="text"
-							className=" bg-gray-200 w-full rounded-r-md py-2"
+							className=" bg-gray-200 w-full rounded-r-md py-2 px-3"
+							value={text}
+							onChange={(e) => {
+								setText(e.target.value), console.log(text);
+							}}
 						/>
-						<button className="bg-button rounded-l-md p-2">✔</button>
+						<button
+							className="bg-button rounded-l-md p-2"
+							onClick={isTextDiscountCode}
+						>
+							✔
+						</button>
 					</div>
 				</div>
 				<div className="flex flex-col gap-2">

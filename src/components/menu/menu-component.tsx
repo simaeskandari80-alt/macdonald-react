@@ -62,7 +62,10 @@ const products = [
 		image: "./src/assets/img/salad.png",
 	},
 ];
-function MenuComponent() {
+function MenuComponent({ setTotalPrice }: { setTotalPrice: () => void }) {
+	function handleTotalPrice() {
+		setTotalPrice();
+	}
 	return (
 		<div className="bg-secondary py-6 px-4 w-full md:w-3/4 flex flex-col items-center gap-4 rounded-xl">
 			<HeaderMenuComponent />
