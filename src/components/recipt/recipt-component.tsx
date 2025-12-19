@@ -1,3 +1,9 @@
+import type { ProductMenuComponentProps } from "../product-menu/product-menu-component";
+// type ReciptComponentProp = {
+// 	totalPrice:number;
+// 	products?: ProductMenuComponentProps;
+// 	count?:number;
+// };
 export default function ReciptComponent() {
 	return (
 		<div className="bg-secondary w-full md:w-1/4 p-4 rounded-2xl">
